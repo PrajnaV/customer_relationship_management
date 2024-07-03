@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm,AddRecordForm
 from .models import *
 from django.contrib.auth.decorators import login_required
 
@@ -41,6 +41,18 @@ def delete_record(request,pk):
     record.delete()
     messages.success(request,"Record deleted successfully..")
     return redirect('index')
+
+@login_required(login_url='index')
+def add_record(request):
+    if request.method == "POST":
+        form = AddRecordForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Record Added")
+            return redirect('index')
+    else:
+        form = AddRecordForm()
+    return render(request,'add_record.html',{'form':form})
 
 
 def register_user(request):
