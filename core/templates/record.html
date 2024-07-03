@@ -1,0 +1,25 @@
+{% extends 'basic.html' %}
+{% block title %}Django CRM{% endblock %}
+{% block body %}
+
+<br>
+<br>
+<div class="container">
+<div class="card border-secondary mb-3" >
+    <div class="card-header">Customer no : {{record.id}}</div>
+    <div class="card-body ">
+      <h5 class="card-title">{{record.name}}</h5>
+      
+      <p class="card-text">Email Id : {{record.email}}</p>
+      <p class="card-text">Phone no : {{record.phone_no}}</p>
+      <p class="card-text">Address : {{record.address}}</p>
+      <p class="card-text">City : {{record.city}}</p>
+      <p class="card-text">State : {{record.state}}</p>
+      <p class="card-text">Pincode : {{record.pincode}}</p>
+      
+    </div>
+  </div>
+  <a href="{% url 'index'%}"><button class="btn btn-secondary">Back</button></a>
+  <a href="/delete_record/{{record.id}}"><button class="btn btn-danger">Delete</button></a>
+</div>
+{% endblock %}

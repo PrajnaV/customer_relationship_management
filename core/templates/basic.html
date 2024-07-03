@@ -27,6 +27,9 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'logout'%}">Logout</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Welcome, {{request.user.username}}</a>
+              </li>
               {% else %}
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{% url 'index'%}">Login</a>
@@ -35,9 +38,7 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'register_user'%}">Register</a>
               </li>
               {% endif %}
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
+              
               
               
             </ul>

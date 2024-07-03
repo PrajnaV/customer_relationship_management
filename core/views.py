@@ -3,9 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
+    customers = Customer.objects.all()
     if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']
@@ -20,12 +23,25 @@ def index(request):
             messages.success(request, "There Was An Error Logging In, Please Try Again...")
             return redirect('home')
     else:
-        return render(request,'index.html')
+        return render(request,'index.html', {'customers': customers})
     
 def logout(request):
     auth.logout(request)
     messages.success(request, "You Have Been Logged Out...")
     return redirect('index')
+
+@login_required(login_url='index')
+def customer_record(request,pk):
+    record = Customer.objects.get(id=pk)
+    return render(request,'record.html',{'record': record})
+
+@login_required(login_url='index')
+def delete_record(request,pk):
+    record = Customer.objects.get(id=pk)
+    record.delete()
+    messages.success(request,"Record deleted successfully..")
+    return redirect('index')
+
 
 def register_user(request):
     if request.method == 'POST':

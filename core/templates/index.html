@@ -12,7 +12,45 @@
         {% endfor %}
       {% endif %}
 {% if user.is_authenticated %}
-<h1>Hello world!! welcome {{request.user.username}}</h1>
+<br>
+<br>
+<div class="container">
+
+          <table class="table table-dark table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone_no</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Pincode</th>
+              </tr>
+            </thead>
+            {% if customers %}
+          {% for customer in customers%}
+            <tbody class="table table-striped">
+              <tr>
+                <th scope="row"><a style="text-decoration: none;" href="/customer_record/{{customer.id}}">{{customer.id}}</a></th>
+                <td>{{customer.name}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.phone_no}}</td>
+                <td>{{customer.address}}</td>
+                <td>{{customer.city}}</td>
+                <td>{{customer.state}}</td>
+                <td>{{customer.pincode}}</td>
+              </tr>
+              
+            </tbody>
+            {% endfor%}
+{% endif %}
+
+          </table>
+        </div>         
+
+
 {% else %}
 <div class="col-md-6 offset-md-3">
     <h1>Login</h1>
