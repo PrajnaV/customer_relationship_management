@@ -20,6 +20,7 @@
     </div>
   </div>
   <a href="{% url 'index'%}"><button class="btn btn-secondary">Back</button></a>
+  <a href="/update/{{record.id}}"><button class="btn btn-secondary">Update Record</button></a>
   <a href="/delete_record/{{record.id}}"><button class="btn btn-danger">Delete</button></a>
 </div>
 {% endblock %}

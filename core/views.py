@@ -54,7 +54,16 @@ def add_record(request):
         form = AddRecordForm()
     return render(request,'add_record.html',{'form':form})
 
-
+@login_required(login_url='index')
+def update(request,pk):
+    current_record = Customer.objects.get(id=pk)
+    form = AddRecordForm(request.POST or None, instance=current_record)  #uses addrecordform to update where the fields of the form will be 
+                                                                          #already filled with current instance values
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Updated successfully !")
+        return redirect('index')
+    return render(request,'update.html',{'form':form})
 def register_user(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
